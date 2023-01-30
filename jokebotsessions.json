@@ -1,0 +1,29 @@
+{
+  "sessions": [
+    {
+      "id": "1244308931:1244308931",
+      "data": {
+        "tellAJoke": true,
+        "Weather": true
+      }
+    },
+    {
+      "id": "404787072:404787072",
+      "data": {
+        "tellAJoke": false
+      }
+    },
+    {
+      "id": "773246677:773246677",
+      "data": {
+        "tellAJoke": true
+      }
+    },
+    {
+      "id": "730933092:730933092",
+      "data": {
+        "tellAJoke": true
+      }
+    }
+  ]
+}
