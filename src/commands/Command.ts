@@ -1,7 +1,7 @@
 
 import { Context, Markup, Telegraf } from "telegraf";
 import { IBotContext } from "../context/IContext";
-import Data from "../data/data.json"
+import { pictures } from "../data/GetData";
 
 export abstract class Command{
     constructor(public bot:Telegraf<IBotContext>){}
@@ -51,6 +51,10 @@ export class StartCommand extends Command{
         this.bot.action("joke",(context)=>{
             context.sendMessage("Напиши город, в котором хочешь узнать погоду в формате анекдота");
             checkMessage("joke");
+        })
+        this.bot.action("animal", async (context)=>{
+            await context.sendMessage(`Вот тебе пикча`)
+            await context.sendPhoto(pictures[15].get('animal'))
         })
         const checkMessage =(method:string)=>{
             return( this.bot.on("text",(context)=>{

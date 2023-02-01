@@ -24,6 +24,18 @@
       "data": {
         "tellAJoke": true
       }
+    },
+    {
+      "id": "811650466:811650466",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "5817887978:5817887978",
+      "data": {
+        "Weather": true
+      }
     }
   ]
 }
