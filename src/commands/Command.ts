@@ -4,7 +4,6 @@ import { IBotContext } from "../context/IContext";
 import { pictures } from "../data/GetData";
 
 let mainMethod:string;
-
 export abstract class Command{
     constructor(public bot:Telegraf<IBotContext>){}
     abstract handle():void;
@@ -41,6 +40,10 @@ export class StartCommand extends Command{
                 Markup.button.callback("На меме","meme"),
                 Markup.button.callback("На милом животном","animal")
             ]))
+        })
+        this.bot.action("beer", async (context)=>{
+            await context.sendMessage("вот тебе пиво;")
+            await context.sendPhoto("")
         })
         this.bot.action("gif",(context)=>{
             context.sendMessage("Напиши город, в котором хочешь узнать погоду в формате gif");
