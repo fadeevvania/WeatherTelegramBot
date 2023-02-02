@@ -37,11 +37,11 @@ export class StartCommand extends Command{
         })
         this.bot.action("light", async (context)=>{
             await context.sendMessage("вот тебе светлое пиво")
-            await context.sendPhoto("")
+            await context.sendPhoto(data[getRandomInt(0,24)].get("beer"))
         })
         this.bot.action("dark", async (context)=>{
             await context.sendMessage("вот тебе тёмное пиво")
-            await context.sendPhoto("")
+            await context.sendPhoto(data[getRandomInt(25,51)].get("beer"))
         })
 
         
