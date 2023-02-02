@@ -1,7 +1,8 @@
 
 import { Context, Markup, Telegraf } from "telegraf";
 import { IBotContext } from "../context/IContext";
-import { pictures } from "../data/GetData";
+import { data } from "../data/GetData";
+import { weather } from "../data/GetWeather";
 
 let mainMethod:string;
 export abstract class Command{
@@ -41,9 +42,11 @@ export class StartCommand extends Command{
                 Markup.button.callback("На милом животном","animal")
             ]))
         })
-        this.bot.action("beer", async (context)=>{
-            await context.sendMessage("вот тебе пиво;")
-            await context.sendPhoto("")
+        this.bot.action("animal", async (context)=>{
+            await context.sendMessage(`вот тебе пиво ${weather[0].name}`)
+        })
+        this.bot.action("beer", (context)=>{
+            
         })
         this.bot.action("gif",(context)=>{
             context.sendMessage("Напиши город, в котором хочешь узнать погоду в формате gif");
@@ -86,8 +89,8 @@ const whatWeather = (city:string,method:string):string=>{
 const changeMethod = (method:string):void=>{
     mainMethod = method;
 }
-function getRandomIntInclusive(min:number, max:number):number {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function getRandomInt(min:number, max:number):number {
+    min = min;
+    max = max;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
