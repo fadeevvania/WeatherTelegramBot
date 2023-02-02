@@ -2,7 +2,7 @@
 import { Context, Markup, Telegraf } from "telegraf";
 import { IBotContext } from "../context/IContext";
 import { data } from "../data/GetData";
-import { weather } from "../data/GetWeather";
+import { getWeatherNow } from "../data/GetWeather";
 
 let mainMethod:string;
 export abstract class Command{
@@ -26,7 +26,10 @@ export class StartCommand extends Command{
             ]))
             
         })
-        
+        this.bot.action("animal", async (context)=>{
+            await context.sendMessage("вот тебе бонус")
+            await context.sendAnimation("https://media.tenor.com/rV8mpdXgZpAAAAAd/i-show-speed-speed.gif")
+        })
         this.bot.action("beer", (context)=>{
             context.session.Weather = true;
             context.reply("Как именно?",Markup.inlineKeyboard([
@@ -43,7 +46,7 @@ export class StartCommand extends Command{
             await context.sendMessage("вот тебе тёмное пиво")
             await context.sendPhoto(data[getRandomInt(25,51)].get("beer"))
         })
-
+    
         
         this.bot.action("meme", (context)=>{
             context.session.Weather = true;
@@ -63,11 +66,6 @@ export class StartCommand extends Command{
                 Markup.button.callback("На милом животном","animal")
             ]))
         })
-        this.bot.action("beer", async (context)=>{
-            await context.sendMessage("вот тебе пиво")
-            await context.sendPhoto("")
-
-        })
         this.bot.action("gif",(context)=>{
             context.sendMessage("Напиши город, в котором хочешь узнать погоду в формате gif");
             checkMessage("gif");    
@@ -84,16 +82,16 @@ export class StartCommand extends Command{
             changeMethod(method);      
                 this.bot.on("text", async (context)=>{
                     console.log(mainMethod)
-                    if(mainMethod === "img"){
-                        await context.replyWithPhoto("");
-                    }
-                    if(mainMethod === "gif") {
-                        await context.replyWithAnimation("");
-                    }
-                    if(mainMethod === "joke"){
-                        await context.sendMessage("");
-                    }
-                    await context.sendMessage(whatWeather(`${context.message.text}`,mainMethod));
+                    // if(mainMethod === "img"){
+                    //     await context.replyWithPhoto("");
+                    // }
+                    // if(mainMethod === "gif") {
+                    //     await context.replyWithAnimation("");
+                    // }
+                    // if(mainMethod === "joke"){
+                    //     await context.sendMessage("");
+                    // }
+                    await context.sendMessage(await whatWeather(`${context.message.text}`,mainMethod));
                     context.reply("Ещё раз?",Markup.inlineKeyboard([
                         Markup.button.callback("Да, к выбору способа","change"),
                         Markup.button.callback("Да, но с новым городом","joke")
@@ -103,8 +101,10 @@ export class StartCommand extends Command{
     }
 }
 
-const whatWeather = (city:string,method:string):string=>{
-    return `Город: ${city} способом: ${method}`;
+const whatWeather = async (city:string,method:string):Promise<string>=>{
+    let weather:any = await getWeatherNow(city);
+    let main = weather.main
+    return await`Город:${weather.name}\nСейчас: ${main.temp}°C\nОщущается как: ${main.feels_like}°C\nТемпература на сегодня:\nМаксимальная ${main.temp_max}°C минимальная: ${main.temp_min}°C\nОблачность ${weather.clouds.all}%`;
 }
 const changeMethod = (method:string):void=>{
     mainMethod = method;
