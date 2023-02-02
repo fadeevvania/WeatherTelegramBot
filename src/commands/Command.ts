@@ -27,8 +27,8 @@ export class StartCommand extends Command{
             
         })
         this.bot.action("animal", async (context)=>{
-            await context.sendMessage("вот тебе бонус")
-            await context.sendAnimation("https://media.tenor.com/rV8mpdXgZpAAAAAd/i-show-speed-speed.gif")
+            context.sendMessage("Напиши город, в котором хочешь узнать погоду с животным");
+            checkMessage("animal");
         })
         this.bot.action("beer", (context)=>{
             context.session.Weather = true;
@@ -47,8 +47,6 @@ export class StartCommand extends Command{
             context.sendMessage("Напиши город, в котором хочешь узнать погоду с пивком");
             checkMessage("dark");    
         })
-    
-        
         this.bot.action("meme", (context)=>{
             context.session.Weather = true;
             context.reply("Как именно?",Markup.inlineKeyboard([
@@ -58,7 +56,6 @@ export class StartCommand extends Command{
                 Markup.button.callback("Изменить способ","change")
             ]))          
         })
-
         this.bot.action("change", (context)=>{
             context.session.Weather = false;
             context.reply("Выбери способ!",Markup.inlineKeyboard([
@@ -82,7 +79,6 @@ export class StartCommand extends Command{
         let checkMessage = (method:string)=>{   
             changeMethod(method);      
                 this.bot.on("text", async (context)=>{
-                    console.log(mainMethod)
                     // if(mainMethod === "img"){
                     //     await context.replyWithPhoto("");
                     // }
@@ -92,7 +88,16 @@ export class StartCommand extends Command{
                     // if(mainMethod === "joke"){
                     //     await context.sendMessage("");
                     // }
-                    await context.sendMessage(await whatWeather(`${context.message.text}`,mainMethod));
+                    if(mainMethod === "light"){
+                        await context.sendPhoto(data[getRandomInt(0,24)].get("beer"));
+                    }
+                    if(mainMethod === "dark") {
+                        await context.sendPhoto(data[getRandomInt(25,50)].get("beer"));
+                    }
+                    if(mainMethod === "animal"){
+                        await context.sendPhoto(data[getRandomInt(0,15)].get("animal"));
+                    }
+                    await context.sendMessage(await whatWeather(`${context.message.text}`));
                     context.reply("Ещё раз?",Markup.inlineKeyboard([
                         Markup.button.callback("Да, к выбору способа","change"),
                         Markup.button.callback("Да, но с новым городом","change")
@@ -103,7 +108,7 @@ export class StartCommand extends Command{
     }
 }
 
-const whatWeather = async (city:string,method:string):Promise<string>=>{
+const whatWeather = async (city:string):Promise<string>=>{
     let weather:any = await getWeatherNow(city);
     let main = weather.main
     return await`Город:${weather.name}\nСейчас: ${main.temp}°C\nОщущается как: ${main.feels_like}°C\nТемпература на сегодня:\nМаксимальная ${main.temp_max}°C минимальная: ${main.temp_min}°C\nОблачность ${weather.clouds.all}%`;
