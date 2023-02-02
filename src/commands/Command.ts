@@ -38,13 +38,14 @@ export class StartCommand extends Command{
                 Markup.button.callback("Изменить способ","change")
             ]))          
         })
-        this.bot.action("light", async (context)=>{
-            await context.sendMessage("вот тебе светлое пиво")
-            await context.sendPhoto(data[getRandomInt(0,24)].get("beer"))
+       
+        this.bot.action("light",(context)=>{
+            context.sendMessage("Напиши город, в котором хочешь узнать погоду с пивком");
+            checkMessage("light");    
         })
-        this.bot.action("dark", async (context)=>{
-            await context.sendMessage("вот тебе тёмное пиво")
-            await context.sendPhoto(data[getRandomInt(25,51)].get("beer"))
+        this.bot.action("dark",(context)=>{
+            context.sendMessage("Напиши город, в котором хочешь узнать погоду с пивком");
+            checkMessage("dark");    
         })
     
         
@@ -94,10 +95,11 @@ export class StartCommand extends Command{
                     await context.sendMessage(await whatWeather(`${context.message.text}`,mainMethod));
                     context.reply("Ещё раз?",Markup.inlineKeyboard([
                         Markup.button.callback("Да, к выбору способа","change"),
-                        Markup.button.callback("Да, но с новым городом","joke")
+                        Markup.button.callback("Да, но с новым городом","change")
                     ]))
                 })
         }
+        
     }
 }
 
