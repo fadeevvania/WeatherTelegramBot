@@ -110,8 +110,8 @@ export class StartCommand extends Command{
 
 const whatWeather = async (city:string):Promise<string>=>{
     let weather:any = await getWeatherNow(city);
-    let main = weather.main
-    return await`Город:${weather.name}\nСейчас: ${main.temp}°C\nОщущается как: ${main.feels_like}°C\nТемпература на сегодня:\nМаксимальная ${main.temp_max}°C минимальная: ${main.temp_min}°C\nОблачность ${weather.clouds.all}%`;
+    let main = weather.data.main;
+    return await`Город:${weather.data.name}\nСейчас: ${main.temp}°C\nОщущается как: ${main.feels_like}°C\nТемпература на сегодня:\nМаксимальная ${main.temp_max}°C минимальная: ${main.temp_min}°C\nОблачность ${weather.data.clouds.all}%`;
 }
 const changeMethod = (method:string):void=>{
     mainMethod = method;

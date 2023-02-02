@@ -1,6 +1,8 @@
 import { ConfigService } from "../ConfigService";
 import { ICOnfigService } from "../IConfigService";
- 
+import  Airtable  from "airtable"
+
+
 class Pictures {
     private _getToken:string
     constructor(private readonly configService: ICOnfigService){
@@ -15,7 +17,6 @@ class Pictures {
 
 let data:any;
 let api:string = new Pictures(new ConfigService()).getToken;
-let Airtable = require('airtable');
 let base = new Airtable({apiKey: api}).base('appgovePiPbjUmH1S');
 
 base('Table 1').select({
