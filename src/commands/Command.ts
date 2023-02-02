@@ -23,7 +23,27 @@ export class StartCommand extends Command{
                 Markup.button.callback("На меме","meme"),
                 Markup.button.callback("На милом животном","animal")
             ]))
+            
         })
+        
+        this.bot.action("beer", (context)=>{
+            context.session.Weather = true;
+            context.reply("Как именно?",Markup.inlineKeyboard([
+                Markup.button.callback("Светлое","light"),
+                Markup.button.callback("Тёмное","dark"),
+                Markup.button.callback("Изменить способ","change")
+            ]))          
+        })
+        this.bot.action("light", async (context)=>{
+            await context.sendMessage("вот тебе светлое пиво")
+            await context.sendPhoto("")
+        })
+        this.bot.action("dark", async (context)=>{
+            await context.sendMessage("вот тебе тёмное пиво")
+            await context.sendPhoto("")
+        })
+
+        
         this.bot.action("meme", (context)=>{
             context.session.Weather = true;
             context.reply("Как именно?",Markup.inlineKeyboard([
@@ -33,6 +53,7 @@ export class StartCommand extends Command{
                 Markup.button.callback("Изменить способ","change")
             ]))          
         })
+
         this.bot.action("change", (context)=>{
             context.session.Weather = false;
             context.reply("Выбери способ!",Markup.inlineKeyboard([
@@ -42,7 +63,7 @@ export class StartCommand extends Command{
             ]))
         })
         this.bot.action("beer", async (context)=>{
-            await context.sendMessage("вот тебе пиво;")
+            await context.sendMessage("вот тебе пиво")
             await context.sendPhoto("")
         })
         this.bot.action("gif",(context)=>{
