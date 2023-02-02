@@ -1,8 +1,10 @@
 
+import path from "path";
 import { Context, Markup, Telegraf } from "telegraf";
 import { IBotContext } from "../context/IContext";
 import { data } from "../data/GetData";
-import { getWeatherNow } from "../data/GetWeather";
+import {getRandomInt,textOverlay} from "../functions/functions"
+
 
 let mainMethod:string;
 export abstract class Command{
@@ -52,7 +54,6 @@ export class StartCommand extends Command{
             context.reply("Как именно?",Markup.inlineKeyboard([
                 Markup.button.callback("Гифкой","gif"),
                 Markup.button.callback("Картинкой","img"),
-                Markup.button.callback("Анекдотом","joke"),
                 Markup.button.callback("Изменить способ","change")
             ]))          
         })
@@ -72,32 +73,31 @@ export class StartCommand extends Command{
             context.sendMessage("Напиши город, в котором хочешь узнать погоду в формате мема");
             checkMessage("img");  
         })
-        this.bot.action("joke",(context)=>{
-            context.sendMessage("Напиши город, в котором хочешь узнать погоду в формате анекдота");
-            checkMessage("joke");
-        })
         let checkMessage = (method:string)=>{   
             changeMethod(method);      
                 this.bot.on("text", async (context)=>{
-                    // if(mainMethod === "img"){
-                    //     await context.replyWithPhoto("");
-                    // }
-                    // if(mainMethod === "gif") {
-                    //     await context.replyWithAnimation("");
-                    // }
-                    // if(mainMethod === "joke"){
-                    //     await context.sendMessage("");
-                    // }
+                    if(mainMethod === "img"){                      
+                        // await textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"))             
+                        textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img");
+                        // await context.sendPhoto(String(textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"))));
+                    }
+                    if(mainMethod === "gif"){
+                        textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif");
+                        // await context.sendAnimation(data[getRandomInt(0,14)].get("gifs"));
+                    }
                     if(mainMethod === "light"){
-                        await context.sendPhoto(data[getRandomInt(0,24)].get("beer"));
+                        textOverlay(context.message.text,data[getRandomInt(0,24)].get("beer"),"img");
+                        // await context.sendPhoto(data[getRandomInt(0,24)].get("beer"));
                     }
                     if(mainMethod === "dark") {
-                        await context.sendPhoto(data[getRandomInt(25,50)].get("beer"));
+                        textOverlay(context.message.text,data[getRandomInt(25,50)].get("beer"),"img");
+                        // await context.sendPhoto(data[getRandomInt(25,50)].get("beer"));
                     }
                     if(mainMethod === "animal"){
-                        await context.sendPhoto(data[getRandomInt(0,15)].get("animal"));
+                        textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"),"img");
+                        // await context.sendPhoto(data[getRandomInt(0,15)].get("animal"));
                     }
-                    await context.sendMessage(await whatWeather(`${context.message.text}`));
+                    // await context.sendMessage(await whatWeather(`${context.message.text}`));
                     context.reply("Ещё раз?",Markup.inlineKeyboard([
                         Markup.button.callback("Да, к выбору способа","change"),
                         Markup.button.callback("Да, но с новым городом","change")
@@ -107,17 +107,6 @@ export class StartCommand extends Command{
         
     }
 }
-
-const whatWeather = async (city:string):Promise<string>=>{
-    let weather:any = await getWeatherNow(city);
-    let main = weather.data.main;
-    return await`Город:${weather.data.name}\nСейчас: ${main.temp}°C\nОщущается как: ${main.feels_like}°C\nТемпература на сегодня:\nМаксимальная ${main.temp_max}°C минимальная: ${main.temp_min}°C\nОблачность ${weather.data.clouds.all}%`;
-}
 const changeMethod = (method:string):void=>{
     mainMethod = method;
-}
-function getRandomInt(min:number, max:number):number {
-    min = min;
-    max = max;
-    return Math.floor(Math.random() * (max - min)) + min;
 }
