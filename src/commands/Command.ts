@@ -76,28 +76,37 @@ export class StartCommand extends Command{
         let checkMessage = (method:string)=>{   
             changeMethod(method);      
                 this.bot.on("text", async (context)=>{
-                    if(mainMethod === "img"){                      
-                        // await textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"))             
-                        textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img");
-                        // await context.sendPhoto(String(textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"))));
+                    const id:number = (await context.sendMessage("Просим подождать буквально минутку, процесс идёт!")).message_id;
+                    if(mainMethod === "img"){                              
+                        // textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img")                    
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img");
+                        await context.sendPhoto({source:path});                   
                     }
                     if(mainMethod === "gif"){
-                        textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif");
-                        // await context.sendAnimation(data[getRandomInt(0,14)].get("gifs"));
+                        // textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif");
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif")
+                        await context.sendAnimation({source:path});
                     }
                     if(mainMethod === "light"){
-                        textOverlay(context.message.text,data[getRandomInt(0,24)].get("beer"),"img");
+                        // textOverlay(context.message.text,data[getRandomInt(0,24)].get("beer"),"img");
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,24)].get("beer"),"img");
+                        await context.sendPhoto({source:path});
                         // await context.sendPhoto(data[getRandomInt(0,24)].get("beer"));
                     }
                     if(mainMethod === "dark") {
-                        textOverlay(context.message.text,data[getRandomInt(25,50)].get("beer"),"img");
+                        // textOverlay(context.message.text,data[getRandomInt(25,50)].get("beer"),"img");
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(25,50)].get("beer"),"img");
+                        await context.sendPhoto({source:path});
                         // await context.sendPhoto(data[getRandomInt(25,50)].get("beer"));
                     }
                     if(mainMethod === "animal"){
-                        textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"),"img");
+                        // textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"),"img");
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"),"img");
+                        await context.sendPhoto({source:path});
                         // await context.sendPhoto(data[getRandomInt(0,15)].get("animal"));
                     }
                     // await context.sendMessage(await whatWeather(`${context.message.text}`));
+                    context.deleteMessage(id)
                     context.reply("Ещё раз?",Markup.inlineKeyboard([
                         Markup.button.callback("Да, к выбору способа","change"),
                         Markup.button.callback("Да, но с новым городом","change")
