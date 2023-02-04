@@ -1,5 +1,3 @@
-
-import path from "path";
 import { Context, Markup, Telegraf } from "telegraf";
 import { IBotContext } from "../context/IContext";
 import { data } from "../data/GetData";
@@ -16,7 +14,6 @@ export class StartCommand extends Command{
     constructor(public bot:Telegraf<IBotContext>){
         super(bot)
     }
-
     handle(): void {
         this.bot.start( async (context)=>{
             console.log(context.session)
@@ -80,29 +77,54 @@ export class StartCommand extends Command{
                     if(mainMethod === "img"){                              
                         // textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img")                    
                         const path:string = await textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img");
-                        await context.sendPhoto({source:path});                   
+                        if(path=="error") {
+                            await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
+                        }
+                        else{
+                            await context.sendPhoto({source:path});     
+                        }     
                     }
                     if(mainMethod === "gif"){
                         // textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif");
                         const path:string = await textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif")
-                        await context.sendAnimation({source:path});
+                        if(path=="error") {
+                            await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
+                        }
+                        else{
+                            await context.sendAnimation({source:path});     
+                        } 
                     }
                     if(mainMethod === "light"){
                         // textOverlay(context.message.text,data[getRandomInt(0,24)].get("beer"),"img");
                         const path:string = await textOverlay(context.message.text,data[getRandomInt(0,24)].get("beer"),"img");
-                        await context.sendPhoto({source:path});
+                        if(path=="error") {
+                            await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
+                        }
+                        else{
+                            await context.sendPhoto({source:path});     
+                        } 
                         // await context.sendPhoto(data[getRandomInt(0,24)].get("beer"));
                     }
                     if(mainMethod === "dark") {
                         // textOverlay(context.message.text,data[getRandomInt(25,50)].get("beer"),"img");
                         const path:string = await textOverlay(context.message.text,data[getRandomInt(25,50)].get("beer"),"img");
-                        await context.sendPhoto({source:path});
+                        if(path=="error") {
+                            await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
+                        }
+                        else{
+                            await context.sendPhoto({source:path});     
+                        } 
                         // await context.sendPhoto(data[getRandomInt(25,50)].get("beer"));
                     }
                     if(mainMethod === "animal"){
                         // textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"),"img");
                         const path:string = await textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"),"img");
-                        await context.sendPhoto({source:path});
+                        if(path=="error") {
+                            await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
+                        }
+                        else{
+                            await context.sendPhoto({source:path});     
+                        } 
                         // await context.sendPhoto(data[getRandomInt(0,15)].get("animal"));
                     }
                     // await context.sendMessage(await whatWeather(`${context.message.text}`));
