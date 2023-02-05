@@ -26,7 +26,6 @@ let  getWeatherNow = async (city:string) => {
       appid: api,
     }
   })
-  console.log(weather)
   
   return weather;
 }
