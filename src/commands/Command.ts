@@ -76,7 +76,7 @@ export class StartCommand extends Command{
                     const id:number = (await context.sendMessage("Просим подождать буквально минутку, процесс идёт!")).message_id;
                     if(mainMethod === "img"){                              
                         // textOverlay(context.message.text,data[getRandomInt(0,9)].get("meme"),"img")                    
-                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,8)].get("meme"),"img");
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,2)].get("img"),"img");
                         if(path=="error") {
                             await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
                         }
@@ -86,7 +86,7 @@ export class StartCommand extends Command{
                     }
                     if(mainMethod === "gif"){
                         // textOverlay(context.message.text,data[getRandomInt(0,14)].get("gifs"),"gif");
-                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,13)].get("gifs"),"gif")
+                        const path:string = await textOverlay(context.message.text,data[getRandomInt(0,20)].get("gif"),"gif")
                         if(path=="error") {
                             await context.sendMessage("Где-то роизошла ошибка, попробуйте ещё раз")
                         }
