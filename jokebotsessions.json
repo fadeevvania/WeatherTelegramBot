@@ -34,11 +34,23 @@
     {
       "id": "5817887978:5817887978",
       "data": {
-        "Weather": true
+        "Weather": false
       }
     },
     {
       "id": "1361395201:1361395201",
+      "data": {
+        "Weather": false
+      }
+    },
+    {
+      "id": "760118434:760118434",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "1350705292:1350705292",
       "data": {
         "Weather": false
       }
