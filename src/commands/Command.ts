@@ -84,7 +84,7 @@ export class StartCommand extends Command{
                         } 
                     }
                     if(mainMethod === "dark") {
-                        path = await textOverlay(context.message.text,data[getRandomInt(0,23)].get("dark"));
+                        path = await textOverlay(context.message.text,data[getRandomInt(0,22)].get("dark"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
                         }
@@ -94,7 +94,7 @@ export class StartCommand extends Command{
                         } 
                     }
                     if(mainMethod === "animal"){
-                        path = await textOverlay(context.message.text,data[getRandomInt(0,16)].get("animal"));
+                        path = await textOverlay(context.message.text,data[getRandomInt(0,51)].get("animal"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
                         }
