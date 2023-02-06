@@ -14,7 +14,6 @@ export const textOverlay = async (text:string,path:string,type:string):Promise<s
       var end = mainText.length;
       const weatherTop = mainText.substring(0,start);
       const weatherBottom = mainText.substring(start+2,end);
-      console.log(path)
       console.log(weatherTop+" "+weatherBottom)
       await cleanFolder('./src/jimp');
       await cleanFolder('./dist/jimp');
