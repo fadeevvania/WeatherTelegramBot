@@ -1,6 +1,4 @@
-import path from "path";
 import { Context, Markup, Telegraf } from "telegraf";
-import fsExtra from 'fs-extra';
 import { IBotContext } from "../context/IContext";
 import { data  } from "../data/GetData";
 import {getRandomInt,textOverlay,cleanFolder,deleteFile} from "../functions/functions"

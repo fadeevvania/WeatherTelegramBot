@@ -15,7 +15,7 @@ export const textOverlay = async (text:string,path:string):Promise<string> =>{
       const weatherTop = mainText.substring(0,start);
       const weatherBottom = mainText.substring(start+2,end);
       console.log(weatherTop+" "+weatherBottom)
-        let localPath = "src/jimp/"+text+Date.now()+".png"
+        let localPath = "dist/jimp/"+text+Date.now()+".png"
         const image = await Jimp.read(path);
         await image.writeAsync(localPath);
         const textFull:Buffer = Buffer.from(`<svg height="${image.getHeight()}" width="${image.getWidth()}">
@@ -27,9 +27,8 @@ export const textOverlay = async (text:string,path:string):Promise<string> =>{
             </text>
         </svg>`)
         const img = sharp(await readFile(localPath)).composite([{input:textFull}]).png().toBuffer()
-        await writeFile(resolve(`./dist/jimp/${text}.png`),await img)
-        deleteFile(localPath);
-        return `dist/jimp/${text}.png`
+        await writeFile(resolve(localPath),await img)
+        return localPath;
       // else{
       //   var gif =await new TextOnGif({
       //     file_path:path,

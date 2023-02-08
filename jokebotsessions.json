@@ -10,7 +10,8 @@
     {
       "id": "404787072:404787072",
       "data": {
-        "tellAJoke": false
+        "tellAJoke": false,
+        "Weather": true
       }
     },
     {
@@ -41,6 +42,30 @@
       "id": "1361395201:1361395201",
       "data": {
         "Weather": false
+      }
+    },
+    {
+      "id": "1350705292:1350705292",
+      "data": {
+        "Weather": false
+      }
+    },
+    {
+      "id": "876270558:876270558",
+      "data": {
+        "Weather": false
+      }
+    },
+    {
+      "id": "465343415:465343415",
+      "data": {
+        "Weather": false
+      }
+    },
+    {
+      "id": "1300684169:1300684169",
+      "data": {
+        "Weather": true
       }
     }
   ]
