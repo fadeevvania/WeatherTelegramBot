@@ -30,24 +30,23 @@ export class StartCommand extends Command{
         this.bot.action("beer", (context)=>{
             context.session.Weather = true;
             context.reply("Как именно?",Markup.inlineKeyboard([
-                Markup.button.callback("Светлое","light"),
-                Markup.button.callback("Тёмное","dark"),
+                Markup.button.callback("С газом","light"),
+                Markup.button.callback("Без газа","dark"),
                 Markup.button.callback("Изменить способ","change")
             ]))          
         })
        
         this.bot.action("light",(context)=>{
-            context.sendMessage("Напиши город, в котором хочешь узнать погоду с пивком");
+            context.sendMessage("Напиши город, в котором хочешь узнать погоду с напитком");
             checkMessage("light");    
         })
         this.bot.action("dark",(context)=>{
-            context.sendMessage("Напиши город, в котором хочешь узнать погоду с пивком");
+            context.sendMessage("Напиши город, в котором хочешь узнать погоду с напитком");
             checkMessage("dark");    
         })
         this.bot.action("change", (context)=>{
-            context.session.Weather = false;
             context.reply("Выбери способ!",Markup.inlineKeyboard([
-                Markup.button.callback("На пиве","beer"),
+                Markup.button.callback("На напитке","beer"),
                 Markup.button.callback("На меме","img"),
                 Markup.button.callback("На милом животном","animal")
             ]))
@@ -65,40 +64,48 @@ export class StartCommand extends Command{
                         path = await textOverlay(context.message.text,data[getRandomInt(0,19)].get("img"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
+                            context.session.Weather = false;
                         }
                         else{
                             await context.sendPhoto({source:path});  
-                            await deleteFile(path);   
+                            await deleteFile(path); 
+                            context.session.Weather = true;  
                         }     
                     }
                     if(mainMethod === "light"){
-                       path= await textOverlay(context.message.text,data[getRandomInt(0,26)].get("light"));
+                       path= await textOverlay(context.message.text,data[getRandomInt(0,19)].get("gas"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
+                            context.session.Weather = false;
                         }
                         else{
                             await context.sendPhoto({source:path});    
                             await deleteFile(path);   
+                            context.session.Weather = true;
                         } 
                     }
                     if(mainMethod === "dark") {
-                        path = await textOverlay(context.message.text,data[getRandomInt(0,22)].get("dark"));
+                        path = await textOverlay(context.message.text,data[getRandomInt(0,14)].get("nogas"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
+                            context.session.Weather = false;
                         }
                         else{
                             await context.sendPhoto({source:path});   
-                            await deleteFile(path);    
+                            await deleteFile(path);   
+                            context.session.Weather = true; 
                         } 
                     }
                     if(mainMethod === "animal"){
                         path = await textOverlay(context.message.text,data[getRandomInt(0,51)].get("animal"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
+                            context.session.Weather = false;
                         }
                         else{
                             await context.sendPhoto({source:path});  
-                            await deleteFile(path);     
+                            await deleteFile(path);    
+                            context.session.Weather = true; 
                         } 
                     }
                     context.deleteMessage(id)

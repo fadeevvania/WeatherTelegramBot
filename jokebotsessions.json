@@ -1,53 +1,15 @@
 {
   "sessions": [
     {
-      "id": "1244308931:1244308931",
-      "data": {
-        "tellAJoke": true,
-        "Weather": true
-      }
-    },
-    {
-      "id": "404787072:404787072",
-      "data": {
-        "tellAJoke": false,
-        "Weather": true
-      }
-    },
-    {
-      "id": "773246677:773246677",
-      "data": {
-        "tellAJoke": true
-      }
-    },
-    {
-      "id": "730933092:730933092",
-      "data": {
-        "tellAJoke": true
-      }
-    },
-    {
       "id": "811650466:811650466",
       "data": {
-        "Weather": false
+        "Weather": true
       }
     },
     {
-      "id": "5817887978:5817887978",
+      "id": "465343415:465343415",
       "data": {
-        "Weather": false
-      }
-    },
-    {
-      "id": "1361395201:1361395201",
-      "data": {
-        "Weather": false
-      }
-    },
-    {
-      "id": "1350705292:1350705292",
-      "data": {
-        "Weather": false
+        "Weather": true
       }
     },
     {
@@ -57,13 +19,49 @@
       }
     },
     {
-      "id": "465343415:465343415",
+      "id": "1244308931:1244308931",
       "data": {
-        "Weather": false
+        "Weather": true
       }
     },
     {
-      "id": "1300684169:1300684169",
+      "id": "730933092:730933092",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "1361395201:1361395201",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "6171533546:6171533546",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "334531937:334531937",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "247754589:247754589",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "865912892:865912892",
+      "data": {
+        "Weather": true
+      }
+    },
+    {
+      "id": "424332642:424332642",
       "data": {
         "Weather": true
       }
