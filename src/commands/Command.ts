@@ -18,7 +18,7 @@ export class StartCommand extends Command{
         this.bot.start( async (context)=>{
             await context.sendMessage(`Привет ${context.message.from.first_name?context.message.from.first_name:"Другалек"}, данный бот позволяет узнать погоду различными забавными способами, для начала выбери способ!`);
             context.reply("Выбери способ!",Markup.inlineKeyboard([
-                Markup.button.callback("На пиве","beer"),
+                Markup.button.callback("На напитке","beer"),
                 Markup.button.callback("На меме","img"),
                 Markup.button.callback("На милом животном","animal")
             ]))           
