@@ -85,7 +85,7 @@ export class StartCommand extends Command{
                         } 
                     }
                     if(mainMethod === "dark") {
-                        path = await textOverlay(context.message.text,data[getRandomInt(0,14)].get("nogas"));
+                        path = await textOverlay(context.message.text,data[getRandomInt(0,19)].get("nogas"));
                         if(path=="error") {
                             await context.sendMessage("Где-то произошла ошибка, попробуйте ещё раз")
                             context.session.Weather = false;
